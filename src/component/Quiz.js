@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import he from "he";
 
-function Quiz() {
+function Quiz({ name }) {
+  if (!name) {
+    name = "Anonymous";
+  }
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
@@ -57,21 +60,30 @@ function Quiz() {
 
   if (showScore) {
     return (
-      <div className="restartdiv">
-        <h1 className="title">Quiz App</h1>
-        <h2>
-          Your score is {score} out of {questions.length}
-        </h2>
-        <button className="restart" onClick={handleRestartButtonClick}>
-          Restart
-        </button>
-      </div>
+      <>
+        <div className="userName">
+          <p>UserName: {name}</p>
+        </div>
+        <div className="restartdiv">
+          <h1 className="title">Quiz App</h1>
+          <h2>
+            Your score is {score} out of {questions.length}
+          </h2>
+
+          <button className="restart" onClick={handleRestartButtonClick}>
+            Restart
+          </button>
+        </div>
+      </>
     );
   }
   return (
     <div>
+      <div className="userName">
+        <p>UserName: {name}</p>
+      </div>
       <h1 className="title">Quiz App</h1>
-      <h2>Question</h2>
+      <h2>Question No: {currentQuestion + 1}</h2>
       <h3>{questions[currentQuestion]?.question}</h3>
       <div>
         {questions[currentQuestion]?.incorrect_answers.map((answer, index) => (

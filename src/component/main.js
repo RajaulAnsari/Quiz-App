@@ -3,16 +3,20 @@ import Quiz from "./Quiz";
 
 function Main() {
   const [isQuizStart, setIsQuizStart] = React.useState(false);
+  const [name, setName] = React.useState("");
 
-  function handleStartClick() {
-    setIsQuizStart((preState) => !preState);
-  }
+  const handleStartClick = () => {
+    setIsQuizStart(true);
+  };
+  const handleName = (e) => {
+    setName(e.target.value);
+  };
   return (
     <>
       <main>
         {isQuizStart ? (
           <div className="container">
-            <Quiz handleStartClick={handleStartClick} />
+            <Quiz name={name} />
           </div>
         ) : (
           <div className="main">
@@ -29,12 +33,30 @@ function Main() {
                 <li className="llist">No back-Tracking. </li>
               </ul>
             </div>
-
+            <div className="namefield">
+              <input
+                type="text"
+                placeholder="Enter your name"
+                value={name}
+                onChange={handleName}
+                required
+              />
+            </div>
             <div className="startbtn">
-              <button className="startbtnin" onClick={handleStartClick}>
+              <button
+                className="startbtnin"
+                onClick={handleStartClick}
+                // disabled={!name}
+              >
                 Start Quiz
               </button>
             </div>
+            <p className="owner">
+              By : &nbsp;
+              <a href="https://www.github.com/RajaulAnsari/">
+                MD. Rajaul Ansari
+              </a>
+            </p>
           </div>
         )}
       </main>
